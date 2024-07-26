@@ -13,7 +13,8 @@ import { log, safeGetConfigArrayOfObjects } from "./utils";
         return config.charging_state.color;
     }
 
-    if (batteryLevel === undefined || isNaN(batteryLevel) || batteryLevel > 100 || batteryLevel < 0) {
+    // if (batteryLevel === undefined || isNaN(batteryLevel) || batteryLevel > 100 || batteryLevel < 0) {
+    if (batteryLevel === undefined || isNaN(batteryLevel) || batteryLevel < 0) {
         return defaultColor;
     }
 
@@ -27,7 +28,8 @@ import { log, safeGetConfigArrayOfObjects } from "./utils";
     if (config.colors?.steps) {
         // making sure the value is always set
         thresholds = colorSteps.map(s => {
-            s.value = s.value === undefined || s.value > 100 ? 100 : s.value;
+            // s.value = s.value === undefined || s.value > 100 ? 100 : s.value;
+            s.value = s.value === undefined ? 100 : s.value;
             return s;
         });
     }
@@ -115,7 +117,8 @@ const defaultColorSteps: IColorSteps[] = [{ value: 20, color: "var(--label-badge
  */
 const getColorInterpolationForPercentage = function (colors: string[], pct: number): string {
     // convert from 0-100 to 0-1 range
-    pct = pct / 100;
+    // pct = pct / 100;
+    pct = (pct > 100 ? 100 : pct) / 100;
 
     const percentColors = colors.map((color, index) => {
         return {

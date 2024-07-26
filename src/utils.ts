@@ -24,7 +24,8 @@ export const isNumber = (value: string | number | boolean | null | undefined): b
 
     if (typeof(value) == "string") {
         // trying to solve decimal number formatting in some langs
-        value = value.replace(",", ".");
+        // value = value.replace(",", ".");
+        value = value.replace(",", "");
     }
 
     return value !== '' && !isNaN(Number(value));
@@ -38,7 +39,8 @@ export const isNumber = (value: string | number | boolean | null | undefined): b
 export const toNumber = (value: string | number | boolean | null | undefined): number => {
     if (typeof(value) == "string") {
         // trying to solve decimal number formatting in some langs
-        value = value.replace(",", ".");
+        // value = value.replace(",", ".");
+        value = value.replace(",", "");
     }
 
     return Number(value);
